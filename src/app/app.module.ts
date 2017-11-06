@@ -12,7 +12,12 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 let firebaseConfig = {
-  //Su Configuración Firebase
+  apiKey: "AIzaSyC7K6MzjNxre7Wf3NHgZYeUtlS6mN0tyCw",
+  authDomain: "cmc6412-23f92.firebaseapp.com",
+  databaseURL: "https://cmc6412-23f92.firebaseio.com",
+  projectId: "cmc6412-23f92",
+  storageBucket: "cmc6412-23f92.appspot.com",
+  messagingSenderId: "815069036535"
 };
 
 @NgModule({
