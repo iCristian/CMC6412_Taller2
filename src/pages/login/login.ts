@@ -36,7 +36,7 @@ export class LoginPage {
       this.loading.present();
 
       this.firebaseService.loginUser(this.loginForm.value.email, this.loginForm.value.password)
-        .then(authData => {
+      .then(authData => {
           this.loading.dismiss().then(() => {
             this.navCtrl.setRoot('TabsPage');
           });
