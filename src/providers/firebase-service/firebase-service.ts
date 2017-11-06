@@ -18,4 +18,23 @@ export class FirebaseService {
     });
   }
 
+  signUp(email, password, name) {
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+    .then( newUser => {
+      this.afd.list('/userProfile').update(newUser.uid, {email: email, name: name});
+    });
+  }
+  
+  loginUser(email, password) {
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password);
+  }
+
+  logoutUser() {
+    return this.afAuth.auth.signOut();
+  }
+
+  resetPassword(email) {
+    return this.afAuth.auth.sendPasswordResetEmail(email);
+  }
+
 }

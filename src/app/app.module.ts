@@ -10,7 +10,9 @@ import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { FirebaseServiceProvider } from '../providers/firebase-service/firebase-service';
+
+import { FirebaseService } from '../providers/firebase-service/firebase-service';
+
 
 let firebaseConfig = {
   apiKey: "AIzaSyC7K6MzjNxre7Wf3NHgZYeUtlS6mN0tyCw",
@@ -41,7 +43,7 @@ let firebaseConfig = {
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    FirebaseServiceProvider
+    FirebaseService
   ]
 })
 export class AppModule {}
