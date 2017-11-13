@@ -10,7 +10,7 @@ import { TabsPage } from './tabs';
     IonicPageModule.forChild(TabsPage),
   ],
   exports: [
-    TabsPage
+    TabsPage,
   ]
 })
 export class TabsPageModule {}

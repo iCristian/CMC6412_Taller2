@@ -1,4 +1,3 @@
-import { TabsPage } from './../tabs/tabs';
 import { Component } from '@angular/core';
 import { IonicPage, Loading, LoadingController, NavController, AlertController } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
@@ -37,7 +36,7 @@ export class LoginPage {
       this.firebaseService.loginUser(this.loginForm.value.email, this.loginForm.value.password)
       .then(authData => {
           this.loading.dismiss().then(() => {
-            this.navCtrl.setRoot(TabsPage);
+            this.navCtrl.setRoot("TabsPage");
           });
         }, error => {
           this.loading.dismiss().then(() => {
@@ -58,11 +57,47 @@ export class LoginPage {
   }
 
   goToSignup(){
-
+    this.navCtrl.push("RegisterPage");
   }
 
   resetPassword(){
+    let prompt = this.alertCtrl.create({
+      title: 'Reset Password',
+      message: 'Enter your email below',
+      inputs: [
+        {
+          name: 'email',
+          placeholder: 'My Email'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+        },
+        {
+          text: 'Reset',
+          handler: data => {
+            this.firebaseService.resetPassword(data.email).then(data => {
+              console.log('reset: ', data);
+              this.showBasicAlert('Success', 'Check your email for further instructions.');
+            })
+              .catch(err => {
+                this.showBasicAlert('Error', err.message);
+              })
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
 
+  showBasicAlert(title, text) {
+    let alert = this.alertCtrl.create({
+      title: title,
+      subTitle: text,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 
 }
