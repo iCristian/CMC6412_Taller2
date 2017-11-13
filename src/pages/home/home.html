@@ -1,18 +1,41 @@
-<!--
-  Generated template for the HomePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>home</ion-title>
-  </ion-navbar>
+    <ion-navbar color="primary">
+        <ion-buttons start>
+            <button ion-button icon-only (click)="logOut()">
+          <ion-icon name="log-out"></ion-icon>
+        </button>
+        </ion-buttons>
+        <ion-title>My Shopping List</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="editMode = !editMode">
+          <ion-icon name="reorder"></ion-icon>
+        </button>
+        </ion-buttons>
+    </ion-navbar>
 
 </ion-header>
 
+<ion-content>
 
-<ion-content padding>
+    <ion-list *ngFor="let list of shoppingLists | async" padding-top>
+        <ion-list-header>
+            <button ion-button item-left clear color="danger" icon-only (click)="removeList(list.$key)" *ngIf="editMode"><ion-icon name="remove-circle"></ion-icon></button> {{ list.name }}
+            <button ion-button item-right clear icon-only (click)="shareList(list.$key, list.name)"><ion-icon name="share"></ion-icon></button>
+            <button ion-button item-right clear icon-only (click)="addItemToList(list.$key, list.name)"><ion-icon name="add"></ion-icon></button>
+        </ion-list-header>
 
+        <ion-item-sliding *ngFor="let shoppingItem of list.shoppingItems | async">
+            <ion-item>
+                {{ shoppingItem.name }}
+            </ion-item>
+            <ion-item-options side="right">
+                <button ion-button color="danger" icon-only (click)="removeItem(shoppingItem.$key, list.$key)"><ion-icon name="trash"></ion-icon></button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+
+    <ion-fab right bottom padding>
+        <button ion-fab (click)="newList()"><ion-icon name="add"></ion-icon></button>
+    </ion-fab>
 </ion-content>
