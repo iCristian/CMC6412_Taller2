@@ -1,7 +1,9 @@
+import { TabsPage } from './../tabs/tabs';
 import { Component } from '@angular/core';
 import { IonicPage, Loading, LoadingController, NavController, AlertController } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { FirebaseService } from '../../providers/firebase-service/firebase-service';
+
 
 @IonicPage()
 @Component({
@@ -26,9 +28,6 @@ export class LoginPage {
 
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
 
   loginUser(): void {
     if (this.loginForm.valid) {
@@ -38,7 +37,7 @@ export class LoginPage {
       this.firebaseService.loginUser(this.loginForm.value.email, this.loginForm.value.password)
       .then(authData => {
           this.loading.dismiss().then(() => {
-            this.navCtrl.setRoot('TabsPage');
+            this.navCtrl.setRoot(TabsPage);
           });
         }, error => {
           this.loading.dismiss().then(() => {
